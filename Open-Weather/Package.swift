@@ -34,7 +34,7 @@ let package = Package(
         
         .target(
             name: "WeatherKit",
-            dependencies: []
+            dependencies: ["CoreNetworking"]
         ),
         .testTarget(
             name: "WeatherKitTests",

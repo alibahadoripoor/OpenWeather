@@ -27,3 +27,53 @@ public struct Main {
     public let pressure: Int
     public let humidity: Int
 }
+
+// MARK: - Conversion
+
+extension WeatherData {
+    
+    init(_ response: WeatherDataResponse) {
+        self.init(
+            coordinate: .init(response.coord),
+            weather: response.weather.map(Weather.init),
+            main: .init(response.main),
+            name: response.name
+        )
+    }
+}
+
+extension Coordinate {
+    
+    init(_ response: CoordinateResponse) {
+        self.init(
+            longitude: response.lon,
+            latitude: response.lat
+        )
+    }
+}
+
+extension Weather {
+    
+    init(_ response: WeatherResponse) {
+        self.init(
+            id: response.id,
+            main: response.main,
+            description: response.description,
+            icon: response.icon
+        )
+    }
+}
+
+extension Main {
+    
+    init(_ response: MainResponse) {
+        self.init(
+            temperature: response.temperature,
+            feelsLike: response.feelsLike,
+            temperatureMin: response.temperatureMin,
+            temperatureMax: response.temperatureMax,
+            pressure: response.pressure,
+            humidity: response.humidity
+        )
+    }
+}
