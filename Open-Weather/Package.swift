@@ -39,7 +39,11 @@ let package = Package(
         ),
         .testTarget(
             name: "WeatherKitTests",
-            dependencies: ["WeatherKit"]
+            dependencies: [
+                "CoreNetworking",
+                "WeatherKit"
+            ],
+            resources: [.process("JSON")]
         ),
     ]
 )
