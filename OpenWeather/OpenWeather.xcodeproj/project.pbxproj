@@ -35,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		500A25BA2A6A093D00C79260 /* Open-Weather */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Open-Weather"; path = "../Open-Weather"; sourceTree = "<group>"; };
+		500A25BC2A6A0C7C00C79260 /* OpenWeather.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = OpenWeather.xctestplan; sourceTree = "<group>"; };
 		502DDD462A69F902003F8C48 /* OpenWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		502DDD492A69F902003F8C48 /* OpenWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherApp.swift; sourceTree = "<group>"; };
 		502DDD4B2A69F902003F8C48 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,6 +76,7 @@
 		502DDD3D2A69F902003F8C48 = {
 			isa = PBXGroup;
 			children = (
+				500A25BC2A6A0C7C00C79260 /* OpenWeather.xctestplan */,
 				500A25BA2A6A093D00C79260 /* Open-Weather */,
 				502DDD482A69F902003F8C48 /* OpenWeather */,
 				502DDD592A69F903003F8C48 /* OpenWeatherTests */,

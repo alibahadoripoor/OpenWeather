@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "B2B3121D-1669-43F4-9759-1849C64F9CA1",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:..\/Open-Weather",
+        "identifier" : "CoreNetworkingTests",
+        "name" : "CoreNetworkingTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:OpenWeather.xcodeproj",
+        "identifier" : "502DDD552A69F903003F8C48",
+        "name" : "OpenWeatherTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:OpenWeather.xcodeproj",
+        "identifier" : "502DDD5F2A69F903003F8C48",
+        "name" : "OpenWeatherUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
