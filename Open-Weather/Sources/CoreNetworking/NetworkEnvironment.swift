@@ -11,13 +11,39 @@ public enum NetworkEnvironment {
 public extension NetworkEnvironment {
     
     var baseURL: URL {
-        switch self {
-        case .production:
-            return .production
+        get throws {
+            switch self {
+            case .production:
+                return try .production
+            }
+        }
+    }
+    
+    var appId: String {
+        get throws {
+            do {
+                let tokenData = try Bundle.module.jsonData(forResource: "Token")
+                let token = try JSONDecoder().decode(Token.self, from: tokenData)
+                return token.appId
+            } catch {
+                throw NetworkEnvironmentError.badToken
+            }
         }
     }
 }
 
 private extension URL {
-    static let production = URL(string: "http://api.openweathermap.org")!
+    static var production: URL {
+        get throws {
+            guard let url = URL(string: "https://api.openweathermap.org") else {
+                throw NetworkEnvironmentError.badBaseURL
+            }
+            return url
+        }
+    }
+}
+
+public enum NetworkEnvironmentError: Error {
+    case badBaseURL
+    case badToken
 }

@@ -23,7 +23,8 @@ let package = Package(
         
         .target(
             name: "CoreNetworking",
-            dependencies: []
+            dependencies: [],
+            resources: [.process("Secrets")]
         ),
         .testTarget(
             name: "CoreNetworkingTests",
