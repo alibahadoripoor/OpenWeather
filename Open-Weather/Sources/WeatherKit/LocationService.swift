@@ -3,7 +3,7 @@ import Combine
 import CoreLocation
 
 public protocol LocationServiceProtocol: AnyObject {
-    var onUpdate: PassthroughSubject<LocationService.LocationResult, Never> { get }
+    var onUpdate: PassthroughSubject<LocationService.CoordinateResult, Never> { get }
     func requestLocationAuthorization()
     func startUpdatingLocation()
 }
@@ -12,8 +12,8 @@ final public class LocationService: NSObject, LocationServiceProtocol {
 
     private let locationManager: CLLocationManager
     
-    public typealias LocationResult = Result<Coordinate, Error>
-    public let onUpdate = PassthroughSubject<LocationResult, Never>()
+    public typealias CoordinateResult = Result<Coordinate, Error>
+    public let onUpdate = PassthroughSubject<CoordinateResult, Never>()
     
     public override init() {
         locationManager = CLLocationManager()

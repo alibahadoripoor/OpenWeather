@@ -6,6 +6,7 @@ public final class WeatherViewModel: ObservableObject {
     private let weatherService: WeatherServiceProtocol
     private let locationService: LocationServiceProtocol
     private var cancellables = Set<AnyCancellable>()
+    private var currentCoordinate: Coordinate?
     
     @Published public private(set) var viewState: ViewState = .none
 
@@ -39,11 +40,12 @@ public final class WeatherViewModel: ObservableObject {
         }
     }
     
-    private func handleLocationResult(_ result: LocationService.LocationResult) {
+    private func handleLocationResult(_ result: LocationService.CoordinateResult) {
         Task {
             switch result {
-            case .success(let location):
-                await self.fetchWeatherData(for: location)
+            case .success(let coordinate):
+                self.currentCoordinate = coordinate
+                await self.fetchWeatherData(for: coordinate)
             case .failure(let error):
                 await updateViewState(.failure(error.localizedDescription))
             }

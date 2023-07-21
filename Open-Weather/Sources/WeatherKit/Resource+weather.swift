@@ -15,9 +15,7 @@ extension Resource where Value == WeatherData {
                     URLQueryItem(name: "appid", value: appId)
                 ]
             }
-            var request = URLRequest(url: url)
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            return request
+            return URLRequest(url: url)
         }, transform: { (data, response) in
             try response.check()
             let responseData = try JSONDecoder().decode(WeatherDataResponse.self, from: data)

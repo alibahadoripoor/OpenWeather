@@ -92,8 +92,8 @@ final class WeatherViewModelTests: XCTestCase {
 
 final private class MockLocationService: LocationServiceProtocol {
 
-    var result: LocationService.LocationResult = .success(.stub)
-    var onUpdate = PassthroughSubject<LocationService.LocationResult, Never>()
+    var result: LocationService.CoordinateResult = .success(.stub)
+    var onUpdate = PassthroughSubject<LocationService.CoordinateResult, Never>()
     var authorizationRequestCount = 0
     
     func requestLocationAuthorization() {

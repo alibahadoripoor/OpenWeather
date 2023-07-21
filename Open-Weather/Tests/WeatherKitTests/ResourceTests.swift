@@ -24,7 +24,6 @@ final class ResourceTests: XCTestCase {
         XCTAssertTrue(query.contains("appid=\(appId)"))
         
         XCTAssertEqual(request.httpMethod, "GET")
-        XCTAssertEqual(request.value(forHTTPHeaderField: "Content-Type"), "application/json")
     }
     
     func test_whenResourceIsCreated_thenTransformedDataIsAsExpected() throws {
