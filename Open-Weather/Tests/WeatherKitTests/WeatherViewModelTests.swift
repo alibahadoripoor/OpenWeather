@@ -23,7 +23,7 @@ final class WeatherViewModelTests: XCTestCase {
         viewModel = nil
     }
     
-    func test_whenDidAppear_andLocationUpdatedSuccessfully_thenCoordinateIsPublishedCorrectly() {
+    func test_whenLocationUpdatedSuccessfully_thenCoordinateIsPublishedCorrectly() {
         let expectation = expectation(description: "Location updated")
         
         mockLocationService.onUpdate
@@ -36,12 +36,12 @@ final class WeatherViewModelTests: XCTestCase {
             }
             .store(in: &cancellables)
         
-        viewModel.onAppear()
+        viewModel.updateLocation()
         
         wait(for: [expectation], timeout: 1)
     }
     
-    func test_whenDidAppear_andLocationUpdateFailed_thenErrorIsPublished() {
+    func test_whenLocationUpdateFailed_thenErrorIsPublished() {
         let expectation = expectation(description: "Location updated failed")
         
         mockLocationService.result = .failure(MockError())
@@ -55,9 +55,14 @@ final class WeatherViewModelTests: XCTestCase {
             }
             .store(in: &cancellables)
         
-        viewModel.onAppear()
+        viewModel.updateLocation()
         
         wait(for: [expectation], timeout: 1)
+    }
+    
+    func test_whenLocationUpdateRequested_thenLocationAuthorizationRequested() {
+        viewModel.updateLocation()
+        XCTAssertEqual(mockLocationService.authorizationRequestCount, 1)
     }
     
     func test_whenWeatherDataFetched_thenViewStateIsWeather_withExpectedWeatherData() async {
@@ -89,6 +94,11 @@ final private class MockLocationService: LocationServiceProtocol {
 
     var result: LocationService.LocationResult = .success(.stub)
     var onUpdate = PassthroughSubject<LocationService.LocationResult, Never>()
+    var authorizationRequestCount = 0
+    
+    func requestLocationAuthorization() {
+        authorizationRequestCount += 1
+    }
     
     func startUpdatingLocation() {
         onUpdate.send(result)

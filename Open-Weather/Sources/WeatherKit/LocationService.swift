@@ -4,6 +4,7 @@ import CoreLocation
 
 public protocol LocationServiceProtocol: AnyObject {
     var onUpdate: PassthroughSubject<LocationService.LocationResult, Never> { get }
+    func requestLocationAuthorization()
     func startUpdatingLocation()
 }
 
@@ -22,9 +23,15 @@ final public class LocationService: NSObject, LocationServiceProtocol {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
 
-    public func startUpdatingLocation() {
+    public func requestLocationAuthorization() {
         locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+    }
+    
+    public func startUpdatingLocation() {
+        /// Monitor only the significant location changes as weather conditions are unlikely to change dramatically in short distances.
+        /// This way we also save system resources. The trad off here would be setting the location update distance manually
+        /// using `locationManager.distanceFilter` 
+        locationManager.startMonitoringSignificantLocationChanges()
     }
 }
 

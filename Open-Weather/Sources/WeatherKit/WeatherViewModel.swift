@@ -23,7 +23,8 @@ public final class WeatherViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    func onAppear() {
+    public func updateLocation() {
+        locationService.requestLocationAuthorization()
         locationService.startUpdatingLocation()
     }
     
