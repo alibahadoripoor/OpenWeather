@@ -32,6 +32,13 @@
         "identifier" : "502DDD5F2A69F903003F8C48",
         "name" : "OpenWeatherUITests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/Open-Weather",
+        "identifier" : "WeatherKitTests",
+        "name" : "WeatherKitTests"
+      }
     }
   ],
   "version" : 1

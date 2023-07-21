@@ -18,6 +18,13 @@
         "identifier" : "CoreNetworkingTests",
         "name" : "CoreNetworkingTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "WeatherKitTests",
+        "name" : "WeatherKitTests"
+      }
     }
   ],
   "version" : 1

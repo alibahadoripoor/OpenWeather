@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Open-Weather"
-               BuildableName = "Open-Weather"
-               BlueprintName = "Open-Weather"
+               BlueprintIdentifier = "WeatherKit"
+               BuildableName = "WeatherKit"
+               BlueprintName = "WeatherKit"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CoreNetworking"
+               BuildableName = "CoreNetworking"
+               BlueprintName = "CoreNetworking"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -54,9 +68,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "Open-Weather"
-            BuildableName = "Open-Weather"
-            BlueprintName = "Open-Weather"
+            BlueprintIdentifier = "WeatherKit"
+            BuildableName = "WeatherKit"
+            BlueprintName = "WeatherKit"
             ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>

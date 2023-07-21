@@ -20,6 +20,34 @@
                ReferencedContainer = "container:OpenWeather.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "WeatherKit"
+               BuildableName = "WeatherKit"
+               BlueprintName = "WeatherKit"
+               ReferencedContainer = "container:../Open-Weather">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CoreNetworking"
+               BuildableName = "CoreNetworking"
+               BlueprintName = "CoreNetworking"
+               ReferencedContainer = "container:../Open-Weather">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -33,30 +61,6 @@
             default = "YES">
          </TestPlanReference>
       </TestPlans>
-      <Testables>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "502DDD552A69F903003F8C48"
-               BuildableName = "OpenWeatherTests.xctest"
-               BlueprintName = "OpenWeatherTests"
-               ReferencedContainer = "container:OpenWeather.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "502DDD5F2A69F903003F8C48"
-               BuildableName = "OpenWeatherUITests.xctest"
-               BlueprintName = "OpenWeatherUITests"
-               ReferencedContainer = "container:OpenWeather.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
