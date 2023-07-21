@@ -10,6 +10,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(name: "CoreNetworking", targets: ["CoreNetworking"]),
         .library(name: "WeatherKit", targets: ["WeatherKit"]),
+        .library(name: "WeatherUI", targets: ["WeatherUI"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -44,6 +45,13 @@ let package = Package(
                 "WeatherKit"
             ],
             resources: [.process("JSON")]
+        ),
+        
+        // MARK: - WeatherKit
+        
+        .target(
+            name: "WeatherUI",
+            dependencies: ["WeatherKit"]
         ),
     ]
 )

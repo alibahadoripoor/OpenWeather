@@ -48,6 +48,20 @@
                ReferencedContainer = "container:../Open-Weather">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "WeatherUI"
+               BuildableName = "WeatherUI"
+               BlueprintName = "WeatherUI"
+               ReferencedContainer = "container:../Open-Weather">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

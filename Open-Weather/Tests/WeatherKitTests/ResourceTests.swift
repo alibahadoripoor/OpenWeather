@@ -27,7 +27,6 @@ final class ResourceTests: XCTestCase {
         XCTAssertEqual(request.value(forHTTPHeaderField: "Content-Type"), "application/json")
     }
     
-    
     func test_whenResourceIsCreated_thenTransformedDataIsAsExpected() throws {
         let jsonData = try Bundle.module.jsonData(forResource: "WeatherData")
         let weatherData = try Resource.weather(for: .stub).transform((jsonData, URLResponse()))
