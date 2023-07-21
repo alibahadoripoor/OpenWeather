@@ -29,7 +29,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:../Open-Weather-Package.xctestplan"
+            reference = "container:Open-Weather-Package.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
