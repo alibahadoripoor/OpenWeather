@@ -33,6 +33,8 @@ final public class LocationService: NSObject, LocationServiceProtocol {
         /// using `locationManager.distanceFilter` 
         locationManager.startMonitoringSignificantLocationChanges()
     }
+    
+    public struct AccessDeniedError: Error {}
 }
 
 // MARK: - CLLocationManagerDelegate
@@ -47,7 +49,11 @@ extension LocationService: CLLocationManagerDelegate {
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        onUpdate.send(.failure(error))
+        if let error = error as? CLError, error.code == .denied {
+            onUpdate.send(.failure(AccessDeniedError()))
+        } else {
+            onUpdate.send(.failure(error))
+        }
     }
 }
 

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		500A25C02A6AFAC100C79260 /* CoreNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 500A25BF2A6AFAC100C79260 /* CoreNetworking */; };
+		500A25C22A6AFAC100C79260 /* WeatherKit in Frameworks */ = {isa = PBXBuildFile; productRef = 500A25C12A6AFAC100C79260 /* WeatherKit */; };
+		500A25C42A6AFAC100C79260 /* WeatherUI in Frameworks */ = {isa = PBXBuildFile; productRef = 500A25C32A6AFAC100C79260 /* WeatherUI */; };
 		502DDD4A2A69F902003F8C48 /* OpenWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502DDD492A69F902003F8C48 /* OpenWeatherApp.swift */; };
 		502DDD4C2A69F902003F8C48 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502DDD4B2A69F902003F8C48 /* ContentView.swift */; };
 		502DDD4E2A69F903003F8C48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 502DDD4D2A69F903003F8C48 /* Assets.xcassets */; };
@@ -54,6 +57,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				500A25C42A6AFAC100C79260 /* WeatherUI in Frameworks */,
+				500A25C22A6AFAC100C79260 /* WeatherKit in Frameworks */,
+				500A25C02A6AFAC100C79260 /* CoreNetworking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +80,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		500A25BE2A6AFAC100C79260 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		502DDD3D2A69F902003F8C48 = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +97,7 @@
 				502DDD592A69F903003F8C48 /* OpenWeatherTests */,
 				502DDD632A69F903003F8C48 /* OpenWeatherUITests */,
 				502DDD472A69F902003F8C48 /* Products */,
+				500A25BE2A6AFAC100C79260 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,6 +163,11 @@
 			dependencies = (
 			);
 			name = OpenWeather;
+			packageProductDependencies = (
+				500A25BF2A6AFAC100C79260 /* CoreNetworking */,
+				500A25C12A6AFAC100C79260 /* WeatherKit */,
+				500A25C32A6AFAC100C79260 /* WeatherUI */,
+			);
 			productName = OpenWeather;
 			productReference = 502DDD462A69F902003F8C48 /* OpenWeather.app */;
 			productType = "com.apple.product-type.application";
@@ -423,12 +442,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OpenWeather/Preview Content\"";
+				DEVELOPMENT_TEAM = 7MBUBXKW3M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide weather updates.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -455,12 +475,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OpenWeather/Preview Content\"";
+				DEVELOPMENT_TEAM = 7MBUBXKW3M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide weather updates.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -603,6 +624,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		500A25BF2A6AFAC100C79260 /* CoreNetworking */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoreNetworking;
+		};
+		500A25C12A6AFAC100C79260 /* WeatherKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WeatherKit;
+		};
+		500A25C32A6AFAC100C79260 /* WeatherUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WeatherUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 502DDD3E2A69F902003F8C48 /* Project object */;
 }
