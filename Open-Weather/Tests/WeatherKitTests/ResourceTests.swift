@@ -44,6 +44,9 @@ final class ResourceTests: XCTestCase {
         XCTAssertEqual(weatherData.main.temperature, 298.48)
         XCTAssertEqual(weatherData.main.temperatureMax, 300.05)
         XCTAssertEqual(weatherData.main.temperatureMin, 297.56)
+        XCTAssertEqual(weatherData.wind.speed, 0.62)
+        XCTAssertEqual(weatherData.wind.degree, 349)
+        XCTAssertEqual(weatherData.wind.gust, 1.18)
     }
 }
 

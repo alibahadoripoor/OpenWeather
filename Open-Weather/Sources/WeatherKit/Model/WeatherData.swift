@@ -4,6 +4,7 @@ public struct WeatherData {
     public let coordinate: Coordinate
     public let weather: [Weather]
     public let main: Main
+    public let wind: Wind
     public let name: String
 }
 
@@ -28,6 +29,12 @@ public struct Main {
     public let humidity: Int
 }
 
+public struct Wind {
+    public let speed: Double
+    public let degree: Int
+    public let gust: Double?
+}
+
 // MARK: - Conversion
 
 extension WeatherData {
@@ -37,6 +44,7 @@ extension WeatherData {
             coordinate: .init(response.coord),
             weather: response.weather.map(Weather.init),
             main: .init(response.main),
+            wind: .init(response.wind),
             name: response.name
         )
     }
@@ -74,6 +82,17 @@ extension Main {
             temperatureMax: response.temperatureMax,
             pressure: response.pressure,
             humidity: response.humidity
+        )
+    }
+}
+
+extension Wind {
+    
+    init(_ response: WindResponse) {
+        self.init(
+            speed: response.speed,
+            degree: response.deg,
+            gust: response.gust
         )
     }
 }

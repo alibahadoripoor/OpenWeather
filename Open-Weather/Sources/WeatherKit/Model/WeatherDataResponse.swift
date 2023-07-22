@@ -4,6 +4,7 @@ struct WeatherDataResponse: Decodable {
     let coord: CoordinateResponse
     let weather: [WeatherResponse]
     let main: MainResponse
+    let wind: WindResponse
     let name: String
 }
 
@@ -35,4 +36,10 @@ struct MainResponse: Decodable {
         case pressure
         case humidity
     }
+}
+
+struct WindResponse: Decodable {
+    let speed: Double
+    let deg: Int
+    let gust: Double?
 }
