@@ -6,6 +6,7 @@ public final class WeatherViewModel: ObservableObject {
     private let weatherService: WeatherServiceProtocol
     private let locationService: LocationServiceProtocol
     private var cancellables = Set<AnyCancellable>()
+    var currentCoordinate: Coordinate?
     
     @Published public private(set) var viewState: ViewState = .none
 
@@ -24,18 +25,19 @@ public final class WeatherViewModel: ObservableObject {
     }
     
     public func updateLocation() {
-        locationService.requestLocationAuthorization()
         locationService.startUpdatingLocation()
     }
     
-    func fetchWeatherData(for coordinate: Coordinate) async {
+    @Sendable
+    public func fetchWeatherData() async {
+        guard let coordinate = currentCoordinate else { return }
         await updateViewState(.loading)
         
         do {
             let weatherData = try await weatherService.fetchWeatherData(for: coordinate)
             await updateViewState(.weather(weatherData))
         } catch {
-            await updateViewState(.failure(Alerts.oops, "Try Again"))
+            await updateViewState(.failure(.serverError))
         }
     }
     
@@ -43,26 +45,36 @@ public final class WeatherViewModel: ObservableObject {
         case none
         case loading
         case weather(WeatherData)
-        case failure(_ message: String, _ buttonLabel: String)
+        case failure(FailureType)
+        
+        public enum FailureType {
+            case accessDenied(FailureContent)
+            case serverError(FailureContent)
+        }
+        
+        public struct FailureContent {
+            public let title: String
+            public let message: String
+            public let buttonLabel: String
+        }
     }
 }
 
-// MARK: -
+// MARK: - Privates
 
 private extension WeatherViewModel {
     
     func handleLocationResult(_ result: LocationService.CoordinateResult) {
         switch result {
         case .success(let coordinate):
+            self.currentCoordinate = coordinate
             Task {
-                await self.fetchWeatherData(for: coordinate)
+                await self.fetchWeatherData()
             }
             
         case .failure(let error):
             if error is LocationService.AccessDeniedError {
-                Task {
-                    await updateViewState(.failure(Alerts.accessDenied, "Share Location"))
-                }
+                Task { await updateViewState(.failure(.accessDenied)) }
             }
         }
     }
@@ -71,11 +83,35 @@ private extension WeatherViewModel {
     func updateViewState(_ viewState: ViewState) {
         self.viewState = viewState
     }
+    
 }
 
-// MARK: -
+// MARK: - FailureType extensions
 
-private struct Alerts {
-    static let accessDenied = "We need to access your location to provide weather updates."
-    static let oops = "Oops... Something went wrong, please try again!"
+private extension WeatherViewModel.ViewState.FailureType {
+    
+    static var serverError: Self {
+        .serverError(.init(
+            title: Texts.networkError,
+            message: Texts.tryAgainMessage,
+            buttonLabel: Texts.tryAgain
+        ))
+    }
+    
+    static var accessDenied: Self {
+        .accessDenied(.init(
+            title: Texts.accessDenied,
+            message: Texts.accessDeniedMessage,
+            buttonLabel: Texts.openSettings
+        ))
+    }
+    
+    private struct Texts {
+        static let accessDenied = "Access Denied"
+        static let accessDeniedMessage = "We need to access your location. Please check your location service settings and try again!"
+        static let networkError = "Network Error"
+        static let tryAgainMessage = "Something went wrong, please try again!"
+        static let tryAgain = "Try Again"
+        static let openSettings = "Open System Settings"
+    }
 }

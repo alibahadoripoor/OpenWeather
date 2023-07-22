@@ -1,16 +1,22 @@
 import SwiftUI
 import WeatherKit
 
-struct ErrorView: View {
+struct MessageView: View {
     
+    let title: String
     let message: String
     let buttonLabel: String
-    let action: () -> Void
+    let action: (() -> Void)
     
     var body: some View {
-        VStack {
+        VStack(spacing: 16) {
+            Text(title)
+                .font(.largeTitle)
+                .bold()
+                .multilineTextAlignment(.center)
+            
             Text(message)
-                .font(.title)
+                .font(.title3)
                 .multilineTextAlignment(.center)
             
             Button(action: action) {

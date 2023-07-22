@@ -16,12 +16,12 @@ public struct WeatherView: View {
                 case .none: EmptyView()
                 case .loading: ProgressView()
                 case let .weather(weatherData):
+                    let _ = print(weatherData.name)
                     EmptyView()
-                case let .failure(message, buttonLabel):
-                    ErrorView(
-                        message: message,
-                        buttonLabel: buttonLabel,
-                        action: viewModel.updateLocation
+                case let .failure(failureType):
+                    WeatherFailureView(
+                        failureType: failureType,
+                        retry: viewModel.fetchWeatherData
                     )
                 }
             }

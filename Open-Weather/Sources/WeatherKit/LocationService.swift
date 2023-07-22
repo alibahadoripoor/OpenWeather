@@ -4,7 +4,6 @@ import CoreLocation
 
 public protocol LocationServiceProtocol: AnyObject {
     var onUpdate: PassthroughSubject<LocationService.CoordinateResult, Never> { get }
-    func requestLocationAuthorization()
     func startUpdatingLocation()
 }
 
@@ -21,17 +20,19 @@ final public class LocationService: NSObject, LocationServiceProtocol {
 
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = 1000
     }
 
-    public func requestLocationAuthorization() {
-        locationManager.requestWhenInUseAuthorization()
-    }
-    
     public func startUpdatingLocation() {
-        /// Monitor only the significant location changes as weather conditions are unlikely to change dramatically in short distances.
-        /// This way we also save system resources. The trad off here would be setting the location update distance manually
-        /// using `locationManager.distanceFilter` 
-        locationManager.startMonitoringSignificantLocationChanges()
+        switch locationManager.authorizationStatus {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .authorizedWhenInUse:
+            locationManager.startUpdatingLocation()
+        case .denied:
+            onUpdate.send(.failure(AccessDeniedError()))
+        default: break
+        }
     }
     
     public struct AccessDeniedError: Error {}
@@ -40,6 +41,16 @@ final public class LocationService: NSObject, LocationServiceProtocol {
 // MARK: - CLLocationManagerDelegate
 
 extension LocationService: CLLocationManagerDelegate {
+    
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
+            locationManager.startUpdatingLocation()
+        case .denied:
+            onUpdate.send(.failure(AccessDeniedError()))
+        default: break
+        }
+    }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
