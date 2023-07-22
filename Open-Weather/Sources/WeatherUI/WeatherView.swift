@@ -25,8 +25,21 @@ public struct WeatherView: View {
                     )
                 }
             }
+            .toolbar { searchButtonView }
         }
         .onAppear(perform: viewModel.updateLocation)
+    }
+    
+    private var searchButtonView: some View {
+        Button {
+            // Opening the search screen
+        } label: {
+            HStack {
+                Text("Search for city")
+                Image(systemName: "magnifyingglass")
+            }
+        }
+        .foregroundColor(.primary)
     }
 }
 
