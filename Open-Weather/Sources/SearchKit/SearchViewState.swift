@@ -5,12 +5,23 @@ public enum SearchViewState {
     case cities([City])
     case failure(FailureContent)
     
+    public struct City: Hashable {
+        public let name: String
+    }
+    
     /// This can be unified with the `WeatherViewState.Failure.FailureContent`
     /// as a single model in a higher level module.
     public struct FailureContent {
         public let title: String
         public let message: String
         public let buttonLabel: String
+    }
+}
+
+extension SearchViewState.City {
+     
+    init(_ city: City) {
+        self.init(name: "\(city.name), \(city.country)")
     }
 }
 

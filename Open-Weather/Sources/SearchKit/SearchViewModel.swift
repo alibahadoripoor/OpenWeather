@@ -7,6 +7,7 @@ public final class SearchViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     @Published public private(set) var viewState: SearchViewState = .initial
+    @Published public var searchQuery: String = ""
 
     public init(cityService: CityServiceProtocol) {
         self.cityService = cityService
@@ -16,7 +17,7 @@ public final class SearchViewModel: ObservableObject {
     public func fetchCities(for query: String) async {
         do {
             let cities = try await cityService.fetchCities(for: query)
-            await updateUI(.cities(cities))
+            await updateUI(.cities(cities.map(SearchViewState.City.init)))
         } catch {
             await updateUI(.failure(.serverError))
         }

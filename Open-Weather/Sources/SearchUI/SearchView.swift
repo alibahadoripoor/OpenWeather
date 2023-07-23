@@ -13,11 +13,29 @@ public struct SearchView: View {
         NavigationStack {
             Group {
                 switch viewModel.viewState {
-                case .initial: EmptyView()
-                case .cities(let cities): EmptyView()
-                case .failure(let failure): EmptyView()
+                case .initial:
+                    EmptyView()
+                case .cities(let cities):
+                    CitiesView(cities: cities)
+                case .failure(let failure):
+                    EmptyView()
                 }
             }
+            .navigationTitle("Search City")
+            .searchable(text: $viewModel.searchQuery)
+        }
+    }
+}
+
+// MARK: - CitiesView
+
+struct CitiesView: View {
+    
+    let cities: [SearchViewState.City]
+    
+    var body: some View {
+        List(cities, id: \.self) { city in
+            Text(city.name)
         }
     }
 }
