@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "E26E2A15-68C1-4B4C-9D09-52C096DAD236",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "CoreNetworkingTests",
+        "name" : "CoreNetworkingTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "WeatherKitTests",
+        "name" : "WeatherKitTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "SearchKitTests",
+        "name" : "SearchKitTests"
+      }
+    }
+  ],
+  "version" : 1
+}

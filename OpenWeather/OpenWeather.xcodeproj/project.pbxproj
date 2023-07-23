@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		500A25C02A6AFAC100C79260 /* CoreNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 500A25BF2A6AFAC100C79260 /* CoreNetworking */; };
+		500A25C22A6AFAC100C79260 /* WeatherKit in Frameworks */ = {isa = PBXBuildFile; productRef = 500A25C12A6AFAC100C79260 /* WeatherKit */; };
+		500A25C42A6AFAC100C79260 /* WeatherUI in Frameworks */ = {isa = PBXBuildFile; productRef = 500A25C32A6AFAC100C79260 /* WeatherUI */; };
 		502DDD4A2A69F902003F8C48 /* OpenWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502DDD492A69F902003F8C48 /* OpenWeatherApp.swift */; };
 		502DDD4C2A69F902003F8C48 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502DDD4B2A69F902003F8C48 /* ContentView.swift */; };
 		502DDD4E2A69F903003F8C48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 502DDD4D2A69F903003F8C48 /* Assets.xcassets */; };
@@ -34,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		500A25BA2A6A093D00C79260 /* Open-Weather */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Open-Weather"; path = "../Open-Weather"; sourceTree = "<group>"; };
+		500A25BC2A6A0C7C00C79260 /* OpenWeather.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = OpenWeather.xctestplan; sourceTree = "<group>"; };
+		500A25BD2A6A0DD900C79260 /* Open-Weather-Package.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Open-Weather-Package.xctestplan"; path = "../Open-Weather/Open-Weather-Package.xctestplan"; sourceTree = "<group>"; };
 		502DDD462A69F902003F8C48 /* OpenWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		502DDD492A69F902003F8C48 /* OpenWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherApp.swift; sourceTree = "<group>"; };
 		502DDD4B2A69F902003F8C48 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,6 +57,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				500A25C42A6AFAC100C79260 /* WeatherUI in Frameworks */,
+				500A25C22A6AFAC100C79260 /* WeatherKit in Frameworks */,
+				500A25C02A6AFAC100C79260 /* CoreNetworking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,13 +80,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		500A25BE2A6AFAC100C79260 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		502DDD3D2A69F902003F8C48 = {
 			isa = PBXGroup;
 			children = (
+				500A25BD2A6A0DD900C79260 /* Open-Weather-Package.xctestplan */,
+				500A25BC2A6A0C7C00C79260 /* OpenWeather.xctestplan */,
+				500A25BA2A6A093D00C79260 /* Open-Weather */,
 				502DDD482A69F902003F8C48 /* OpenWeather */,
 				502DDD592A69F903003F8C48 /* OpenWeatherTests */,
 				502DDD632A69F903003F8C48 /* OpenWeatherUITests */,
 				502DDD472A69F902003F8C48 /* Products */,
+				500A25BE2A6AFAC100C79260 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -143,6 +163,11 @@
 			dependencies = (
 			);
 			name = OpenWeather;
+			packageProductDependencies = (
+				500A25BF2A6AFAC100C79260 /* CoreNetworking */,
+				500A25C12A6AFAC100C79260 /* WeatherKit */,
+				500A25C32A6AFAC100C79260 /* WeatherUI */,
+			);
 			productName = OpenWeather;
 			productReference = 502DDD462A69F902003F8C48 /* OpenWeather.app */;
 			productType = "com.apple.product-type.application";
@@ -345,7 +370,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -399,7 +424,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -417,13 +442,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OpenWeather/Preview Content\"";
+				DEVELOPMENT_TEAM = 7MBUBXKW3M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide weather updates.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -431,9 +459,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.OpenWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -445,13 +476,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"OpenWeather/Preview Content\"";
+				DEVELOPMENT_TEAM = 7MBUBXKW3M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide weather updates.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -459,9 +493,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.OpenWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -473,13 +510,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.OpenWeatherTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenWeather.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OpenWeather";
 			};
 			name = Debug;
@@ -492,13 +532,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.OpenWeatherTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenWeather.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/OpenWeather";
 			};
 			name = Release;
@@ -513,9 +556,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.OpenWeatherUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_TARGET_NAME = OpenWeather;
 			};
 			name = Debug;
@@ -530,9 +576,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.OpenWeatherUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_TARGET_NAME = OpenWeather;
 			};
 			name = Release;
@@ -577,6 +626,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		500A25BF2A6AFAC100C79260 /* CoreNetworking */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoreNetworking;
+		};
+		500A25C12A6AFAC100C79260 /* WeatherKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WeatherKit;
+		};
+		500A25C32A6AFAC100C79260 /* WeatherUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WeatherUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 502DDD3E2A69F902003F8C48 /* Project object */;
 }
