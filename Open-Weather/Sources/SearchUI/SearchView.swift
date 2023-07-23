@@ -4,9 +4,11 @@ import SearchKit
 public struct SearchView: View {
     
     @StateObject private var viewModel: SearchViewModel
+    @Binding private var isPresented: Bool
     
-    public init(viewModel: SearchViewModel) {
+    public init(viewModel: SearchViewModel, isPresented: Binding<Bool>) {
         self._viewModel = StateObject(wrappedValue: viewModel)
+        self._isPresented = isPresented
     }
     
     public var body: some View {
@@ -21,9 +23,22 @@ public struct SearchView: View {
                     EmptyView()
                 }
             }
-            .navigationTitle("Search City")
             .searchable(text: $viewModel.searchQuery)
+            .navigationTitle("Search For City")
+            .toolbar { closeButtonView }
         }
+    }
+}
+
+// MARK: - Privates
+
+private extension SearchView {
+    
+    var closeButtonView: some View {
+        Button("Close") {
+            isPresented = false
+        }
+        .bold()
     }
 }
 

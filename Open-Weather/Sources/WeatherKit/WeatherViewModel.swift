@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import SearchKit
 
 public final class WeatherViewModel: ObservableObject {
     
@@ -39,6 +40,10 @@ public final class WeatherViewModel: ObservableObject {
         } catch {
             await updateViewState(.failure(.serverError))
         }
+    }
+    
+    public func searchViewModel() -> SearchViewModel {
+        SearchViewModel(cityService: CityService())
     }
 }
 

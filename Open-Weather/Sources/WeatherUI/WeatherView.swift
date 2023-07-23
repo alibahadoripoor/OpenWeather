@@ -1,9 +1,11 @@
 import SwiftUI
 import WeatherKit
+import SearchUI
 
 public struct WeatherView: View {
     
     @StateObject private var viewModel: WeatherViewModel
+    @State private var isSearchViewPresented = false
     
     public init(viewModel: WeatherViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel)
@@ -27,6 +29,12 @@ public struct WeatherView: View {
             .toolbar { searchButtonView }
         }
         .onAppear(perform: viewModel.updateLocation)
+        .sheet(isPresented: $isSearchViewPresented) {
+            SearchView(
+                viewModel: viewModel.searchViewModel(),
+                isPresented: $isSearchViewPresented
+            )
+        }
     }
 }
 
@@ -46,9 +54,9 @@ public extension WeatherView {
 
 private extension WeatherView {
     
-    private var searchButtonView: some View {
+    var searchButtonView: some View {
         Button {
-            // Opening the search screen
+            isSearchViewPresented = true
         } label: {
             HStack {
                 Text("Search for city")
@@ -56,6 +64,5 @@ private extension WeatherView {
             }
             .bold()
         }
-        .foregroundColor(.blue)
     }
 }
