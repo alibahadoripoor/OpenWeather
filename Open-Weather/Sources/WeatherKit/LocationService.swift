@@ -1,9 +1,10 @@
 import Foundation
 import Combine
 import CoreLocation
+import CoreModel
 
 public protocol LocationServiceProtocol: AnyObject {
-    var onUpdate: PassthroughSubject<LocationService.CoordinateResult, Never> { get }
+    var onUpdate: PassthroughSubject<LocationService.LocationResult, Never> { get }
     func startUpdatingLocation()
 }
 
@@ -11,8 +12,8 @@ final public class LocationService: NSObject, LocationServiceProtocol {
 
     private let locationManager: CLLocationManager
     
-    public typealias CoordinateResult = Result<Coordinate, Error>
-    public let onUpdate = PassthroughSubject<CoordinateResult, Never>()
+    public typealias LocationResult = Result<Location, Error>
+    public let onUpdate = PassthroughSubject<LocationResult, Never>()
     
     public override init() {
         locationManager = CLLocationManager()
@@ -35,6 +36,11 @@ final public class LocationService: NSObject, LocationServiceProtocol {
         }
     }
     
+    public struct Location {
+        let latitude: Double
+        let longitude: Double
+    }
+    
     public struct AccessDeniedError: Error {}
 }
 
@@ -54,7 +60,7 @@ extension LocationService: CLLocationManagerDelegate {
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            let coordinate = Coordinate(location: location)
+            let coordinate = Location(clLocation: location)
             onUpdate.send(.success(coordinate))
         }
     }
@@ -68,14 +74,14 @@ extension LocationService: CLLocationManagerDelegate {
     }
 }
 
-// MARK: - Coordinate Conversion
+// MARK: - Location Conversion
 
-private extension Coordinate {
+private extension LocationService.Location {
     
-    init(location: CLLocation) {
+    init(clLocation: CLLocation) {
         self.init(
-            longitude: location.coordinate.longitude,
-            latitude: location.coordinate.latitude
+            latitude: clLocation.coordinate.latitude,
+            longitude: clLocation.coordinate.longitude
         )
     }
 }

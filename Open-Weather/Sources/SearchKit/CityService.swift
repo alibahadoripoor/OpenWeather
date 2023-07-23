@@ -1,5 +1,6 @@
 import Foundation
 import CoreNetworking
+import CoreModel
 
 public protocol CityServiceProtocol {
     func fetchCities(for query: String) async throws -> [City]

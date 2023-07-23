@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import CoreModel
 import SearchKit
 
 public final class WeatherViewModel: ObservableObject {
@@ -7,7 +8,7 @@ public final class WeatherViewModel: ObservableObject {
     private let weatherService: WeatherServiceProtocol
     private let locationService: LocationServiceProtocol
     private var cancellables = Set<AnyCancellable>()
-    var currentCoordinate: Coordinate?
+    var currentLocation: LocationService.Location?
     
     @Published public private(set) var viewState: WeatherViewState = .none
 
@@ -31,11 +32,11 @@ public final class WeatherViewModel: ObservableObject {
     
     @Sendable
     public func fetchWeatherData() async {
-        guard let coordinate = currentCoordinate else { return }
+        guard let location = currentLocation else { return }
         await updateViewState(.loading)
         
         do {
-            let weatherData = try await weatherService.fetchWeatherData(for: coordinate)
+            let weatherData = try await weatherService.fetchWeatherData(forLocation: location)
             await updateViewState(.weather(.init(weatherData)))
         } catch {
             await updateViewState(.failure(.serverError))
@@ -60,10 +61,10 @@ public final class WeatherViewModel: ObservableObject {
 
 private extension WeatherViewModel {
     
-    func handleLocationResult(_ result: LocationService.CoordinateResult) {
+    func handleLocationResult(_ result: LocationService.LocationResult) {
         switch result {
-        case .success(let coordinate):
-            self.currentCoordinate = coordinate
+        case .success(let location):
+            self.currentLocation = location
             Task {
                 await self.fetchWeatherData()
             }

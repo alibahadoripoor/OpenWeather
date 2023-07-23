@@ -11,7 +11,7 @@ public struct City {
 
 // MARK: - Conversion
 
-extension City {
+public extension City {
     
     init(_ response: CityResponse) {
         self.init(

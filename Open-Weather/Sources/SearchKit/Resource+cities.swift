@@ -1,5 +1,6 @@
 import Foundation
 import CoreNetworking
+import CoreModel
 
 extension Resource where Value == [City] {
     

@@ -9,6 +9,7 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(name: "CoreNetworking", targets: ["CoreNetworking"]),
+        .library(name: "CoreModel", targets: ["CoreModel"]),
         .library(name: "CoreAssets", targets: ["CoreAssets"]),
         .library(name: "WeatherKit", targets: ["WeatherKit"]),
         .library(name: "WeatherUI", targets: ["WeatherUI"]),
@@ -35,6 +36,13 @@ let package = Package(
             dependencies: ["CoreNetworking"]
         ),
         
+        // MARK: - CoreModel
+        
+        .target(
+            name: "CoreModel",
+            dependencies: []
+        ),
+        
         // MARK: - CoreAssets
         
         .target(
@@ -49,6 +57,7 @@ let package = Package(
             name: "WeatherKit",
             dependencies: [
                 "CoreNetworking",
+                "CoreModel",
                 "SearchKit"
             ]
         ),
@@ -56,6 +65,7 @@ let package = Package(
             name: "WeatherKitTests",
             dependencies: [
                 "CoreNetworking",
+                "CoreModel",
                 "WeatherKit"
             ],
             resources: [.process("JSON")]
@@ -76,12 +86,16 @@ let package = Package(
         
         .target(
             name: "SearchKit",
-            dependencies: ["CoreNetworking"]
+            dependencies: [
+                "CoreNetworking",
+                "CoreModel"
+            ]
         ),
         .testTarget(
             name: "SearchKitTests",
             dependencies: [
                 "CoreNetworking",
+                "CoreModel",
                 "SearchKit"
             ],
             resources: [.process("JSON")]

@@ -1,5 +1,6 @@
 import Foundation
 import CoreNetworking
+import CoreModel
 
 public enum WeatherViewState {
     case none

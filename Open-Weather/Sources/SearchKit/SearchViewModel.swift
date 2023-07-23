@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import CoreModel
 
 public final class SearchViewModel: ObservableObject {
     
@@ -33,7 +34,6 @@ public final class SearchViewModel: ObservableObject {
     
     public func citySelected(_ id: String) {
         selectedCity = cities.first { $0.id == id }
-        print(selectedCity)
     }
     
     @MainActor

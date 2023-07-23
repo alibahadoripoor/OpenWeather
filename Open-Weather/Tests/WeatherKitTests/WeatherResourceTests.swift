@@ -1,11 +1,12 @@
 import XCTest
+@testable import CoreModel
 @testable import CoreNetworking
 @testable import WeatherKit
 
 final class WeatherResourceTests: XCTestCase {
     
     func test_whenResourceIsCreated_thenRequestIsAsExpected() throws {
-        let request = try Resource.weather(for: .stub).makeRequest()
+        let request = try Resource.weather(forLocation: .stub).makeRequest()
         
         let url = try XCTUnwrap(request.url)
         XCTAssertEqual(url.scheme, "https")
@@ -28,7 +29,7 @@ final class WeatherResourceTests: XCTestCase {
     
     func test_whenResourceIsCreated_thenTransformedDataIsAsExpected() throws {
         let jsonData = try Bundle.module.jsonData(forResource: "WeatherData")
-        let weatherData = try Resource.weather(for: .stub).transform((jsonData, URLResponse()))
+        let weatherData = try Resource.weather(forLocation: .stub).transform((jsonData, URLResponse()))
         
         XCTAssertEqual(weatherData.name, "Zocca")
         XCTAssertEqual(weatherData.coordinate.latitude, 44.34)
@@ -50,6 +51,6 @@ final class WeatherResourceTests: XCTestCase {
     }
 }
 
-private extension Coordinate {
-    static let stub = Coordinate(longitude: 10, latitude: 20)
+private extension LocationService.Location {
+    static let stub = Self(latitude: 20, longitude: 10)
 }

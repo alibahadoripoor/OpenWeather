@@ -1,4 +1,5 @@
 import Foundation
+import CoreModel
 
 public enum SearchViewState {
     case initial

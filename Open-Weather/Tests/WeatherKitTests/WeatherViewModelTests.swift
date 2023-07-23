@@ -1,5 +1,6 @@
 import XCTest
 import Combine
+@testable import CoreModel
 @testable import CoreNetworking
 @testable import WeatherKit
 
@@ -80,7 +81,7 @@ final class WeatherViewModelTests: XCTestCase {
     }
     
     func test_whenWeatherDataFetched_thenViewStateIsWeather_withExpectedWeatherData() async {
-        viewModel.currentCoordinate = .stub
+        viewModel.currentLocation = .stub
         await viewModel.fetchWeatherData()
         
         guard case .weather(let weather) = viewModel.viewState else {
@@ -113,7 +114,7 @@ final class WeatherViewModelTests: XCTestCase {
     }
     
     func test_whenFetchingWeatherDataFailed_thenViewStateIsFailure_andFailureTypeIsServerError() async {
-        viewModel.currentCoordinate = .stub
+        viewModel.currentLocation = .stub
         mockWeatherService.isResultSuccess = false
         
         await viewModel.fetchWeatherData()
@@ -133,8 +134,8 @@ final class WeatherViewModelTests: XCTestCase {
 
 final private class MockLocationService: LocationServiceProtocol {
 
-    var result: LocationService.CoordinateResult = .success(.stub)
-    var onUpdate = PassthroughSubject<LocationService.CoordinateResult, Never>()
+    var result: LocationService.LocationResult = .success(.stub)
+    var onUpdate = PassthroughSubject<LocationService.LocationResult, Never>()
     
     func startUpdatingLocation() {
         onUpdate.send(result)
@@ -147,10 +148,19 @@ final private class MockWeatherService: WeatherServiceProtocol {
     
     var isResultSuccess: Bool = true
     
-    func fetchWeatherData(for coordinate: Coordinate) async throws -> WeatherData {
+    func fetchWeatherData(forLocation location: LocationService.Location) async throws -> WeatherData {
         if isResultSuccess {
             let jsonData = try Bundle.module.jsonData(forResource: "WeatherData")
-            return try Resource.weather(for: .stub).transform((jsonData, URLResponse()))
+            return try Resource.weather(forLocation: .stub).transform((jsonData, URLResponse()))
+        } else {
+            throw MockError()
+        }
+    }
+    
+    func fetchWeatherData(forCity city: City) async throws -> WeatherData {
+        if isResultSuccess {
+            let jsonData = try Bundle.module.jsonData(forResource: "WeatherData")
+            return try Resource.weather(forCity: .stub).transform((jsonData, URLResponse()))
         } else {
             throw MockError()
         }
@@ -159,8 +169,21 @@ final private class MockWeatherService: WeatherServiceProtocol {
 
 // MARK: - Coordinate
 
-private extension Coordinate {
-    static let stub = Coordinate(longitude: 10, latitude: 20)
+private extension LocationService.Location {
+    static let stub = Self(latitude: 20, longitude: 10)
+}
+
+// MARK: - City
+
+private extension City {
+    static let stub = City(
+        id: "id",
+        name: "Berlin",
+        latitude: 10,
+        longitude: 20,
+        country: "DE",
+        state: nil
+    )
 }
 
 // MARK: - MockError

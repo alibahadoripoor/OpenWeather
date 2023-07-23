@@ -1,8 +1,10 @@
 import Foundation
 import CoreNetworking
+import CoreModel
 
 public protocol WeatherServiceProtocol {
-    func fetchWeatherData(for coordinate: Coordinate) async throws -> WeatherData
+    func fetchWeatherData(forLocation location: LocationService.Location) async throws -> WeatherData
+    func fetchWeatherData(forCity city: City) async throws -> WeatherData
 }
 
 final public class WeatherService: WeatherServiceProtocol {
@@ -13,7 +15,11 @@ final public class WeatherService: WeatherServiceProtocol {
         self.session = session
     }
     
-    public func fetchWeatherData(for coordinate: Coordinate) async throws -> WeatherData {
-        try await session.fetch(.weather(for: coordinate))
+    public func fetchWeatherData(forLocation location: LocationService.Location) async throws -> WeatherData {
+        try await session.fetch(.weather(forLocation: location))
+    }
+    
+    public func fetchWeatherData(forCity city: City) async throws -> WeatherData {
+        try await session.fetch(.weather(forCity: city))
     }
 }

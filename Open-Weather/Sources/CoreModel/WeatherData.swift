@@ -1,6 +1,14 @@
 import Foundation
 
 public struct WeatherData {
+    internal init(coordinate: Coordinate, weather: [Weather], main: Main, wind: Wind, name: String) {
+        self.coordinate = coordinate
+        self.weather = weather
+        self.main = main
+        self.wind = wind
+        self.name = name
+    }
+    
     public let coordinate: Coordinate
     public let weather: [Weather]
     public let main: Main
@@ -37,7 +45,7 @@ public struct Wind {
 
 // MARK: - Conversion
 
-extension WeatherData {
+public extension WeatherData {
     
     init(_ response: WeatherDataResponse) {
         self.init(
