@@ -13,10 +13,10 @@
   ],
   "base": "stations",
   "main": {
-    "temp": 298.48,
-    "feels_like": 298.74,
-    "temp_min": 297.56,
-    "temp_max": 300.05,
+    "temp": 20.48,
+    "feels_like": 15.74,
+    "temp_min": 14.56,
+    "temp_max": 25.05,
     "pressure": 1015,
     "humidity": 64,
     "sea_level": 1015,
@@ -24,7 +24,7 @@
   },
   "visibility": 10000,
   "wind": {
-    "speed": 0.62,
+    "speed": 5.62,
     "deg": 349,
     "gust": 1.18
   },

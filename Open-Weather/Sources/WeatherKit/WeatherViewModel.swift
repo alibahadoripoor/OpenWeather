@@ -8,7 +8,7 @@ public final class WeatherViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     var currentCoordinate: Coordinate?
     
-    @Published public private(set) var viewState: ViewState = .none
+    @Published public private(set) var viewState: WeatherViewState = .none
 
     public init(
         weatherService: WeatherServiceProtocol,
@@ -35,27 +35,9 @@ public final class WeatherViewModel: ObservableObject {
         
         do {
             let weatherData = try await weatherService.fetchWeatherData(for: coordinate)
-            await updateViewState(.weather(weatherData))
+            await updateViewState(.weather(.init(weatherData)))
         } catch {
             await updateViewState(.failure(.serverError))
-        }
-    }
-    
-    public enum ViewState {
-        case none
-        case loading
-        case weather(WeatherData)
-        case failure(FailureType)
-        
-        public enum FailureType {
-            case accessDenied(FailureContent)
-            case serverError(FailureContent)
-        }
-        
-        public struct FailureContent {
-            public let title: String
-            public let message: String
-            public let buttonLabel: String
         }
     }
 }
@@ -80,38 +62,7 @@ private extension WeatherViewModel {
     }
     
     @MainActor
-    func updateViewState(_ viewState: ViewState) {
+    func updateViewState(_ viewState: WeatherViewState) {
         self.viewState = viewState
-    }
-    
-}
-
-// MARK: - FailureType extensions
-
-private extension WeatherViewModel.ViewState.FailureType {
-    
-    static var serverError: Self {
-        .serverError(.init(
-            title: Texts.networkError,
-            message: Texts.tryAgainMessage,
-            buttonLabel: Texts.tryAgain
-        ))
-    }
-    
-    static var accessDenied: Self {
-        .accessDenied(.init(
-            title: Texts.accessDenied,
-            message: Texts.accessDeniedMessage,
-            buttonLabel: Texts.openSettings
-        ))
-    }
-    
-    private struct Texts {
-        static let accessDenied = "Access Denied"
-        static let accessDeniedMessage = "We need to access your location. Please check your location service settings and try again!"
-        static let networkError = "Network Error"
-        static let tryAgainMessage = "Something went wrong, please try again!"
-        static let tryAgain = "Try Again"
-        static let openSettings = "Open System Settings"
     }
 }

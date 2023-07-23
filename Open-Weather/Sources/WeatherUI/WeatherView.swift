@@ -15,12 +15,11 @@ public struct WeatherView: View {
                 switch viewModel.viewState {
                 case .none: EmptyView()
                 case .loading: ProgressView()
-                case let .weather(weatherData):
-                    let _ = print(weatherData.name)
-                    EmptyView()
-                case let .failure(failureType):
+                case .weather(let weather):
+                    WeatherContentView(weather: weather)
+                case .failure(let failure):
                     WeatherFailureView(
-                        failureType: failureType,
+                        failure: failure,
                         retry: viewModel.fetchWeatherData
                     )
                 }
@@ -28,18 +27,6 @@ public struct WeatherView: View {
             .toolbar { searchButtonView }
         }
         .onAppear(perform: viewModel.updateLocation)
-    }
-    
-    private var searchButtonView: some View {
-        Button {
-            // Opening the search screen
-        } label: {
-            HStack {
-                Text("Search for city")
-                Image(systemName: "magnifyingglass")
-            }
-        }
-        .foregroundColor(.primary)
     }
 }
 
@@ -52,5 +39,23 @@ public extension WeatherView {
             weatherService: WeatherService(),
             locationService: LocationService()
         ))
+    }
+}
+
+// MARK: - Privates
+
+private extension WeatherView {
+    
+    private var searchButtonView: some View {
+        Button {
+            // Opening the search screen
+        } label: {
+            HStack {
+                Text("Search for city")
+                Image(systemName: "magnifyingglass")
+            }
+            .bold()
+        }
+        .foregroundColor(.blue)
     }
 }

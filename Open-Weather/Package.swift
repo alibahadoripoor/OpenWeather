@@ -60,7 +60,10 @@ let package = Package(
         
         .target(
             name: "WeatherUI",
-            dependencies: ["WeatherKit"]
+            dependencies: [
+                "CoreAssets",
+                "WeatherKit"
+            ]
         ),
     ]
 )

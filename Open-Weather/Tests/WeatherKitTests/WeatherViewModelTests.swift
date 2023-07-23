@@ -69,7 +69,11 @@ final class WeatherViewModelTests: XCTestCase {
             return
         }
         
-        XCTAssertEqual(weather.name, "Zocca")
+        XCTAssertEqual(weather.cityName, "Zocca")
+        XCTAssertEqual(weather.description, "Moderate Rain\nH:25°C L:14°C")
+        XCTAssertEqual(weather.iconUrl?.absoluteString, "https://openweathermap.org/img/wn/10d@2x.png")
+        XCTAssertEqual(weather.temperature, "20°C")
+        XCTAssertEqual(weather.tiles.count, 4)
     }
     
     func test_whenFetchingWeatherDataFailed_thenViewStateIsFailure() async {
