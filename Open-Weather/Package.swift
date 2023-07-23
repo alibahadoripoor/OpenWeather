@@ -12,6 +12,7 @@ let package = Package(
         .library(name: "CoreAssets", targets: ["CoreAssets"]),
         .library(name: "WeatherKit", targets: ["WeatherKit"]),
         .library(name: "WeatherUI", targets: ["WeatherUI"]),
+        .library(name: "SearchKit", targets: ["SearchKit"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -64,6 +65,21 @@ let package = Package(
                 "CoreAssets",
                 "WeatherKit"
             ]
+        ),
+        
+        // MARK: - SearchKit
+        
+        .target(
+            name: "SearchKit",
+            dependencies: ["CoreNetworking"]
+        ),
+        .testTarget(
+            name: "SearchKitTests",
+            dependencies: [
+                "CoreNetworking",
+                "SearchKit"
+            ],
+            resources: [.process("JSON")]
         ),
     ]
 )

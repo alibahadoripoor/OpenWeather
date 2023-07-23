@@ -2,7 +2,7 @@ import XCTest
 @testable import CoreNetworking
 @testable import WeatherKit
 
-final class ResourceTests: XCTestCase {
+final class WeatherResourceTests: XCTestCase {
     
     func test_whenResourceIsCreated_thenRequestIsAsExpected() throws {
         let request = try Resource.weather(for: .stub).makeRequest()
@@ -38,13 +38,13 @@ final class ResourceTests: XCTestCase {
         XCTAssertEqual(weatherData.weather.first?.description, "moderate rain")
         XCTAssertEqual(weatherData.weather.first?.icon, "10d")
         XCTAssertEqual(weatherData.weather.first?.main, "Rain")
-        XCTAssertEqual(weatherData.main.feelsLike, 298.74)
+        XCTAssertEqual(weatherData.main.feelsLike, 15.74)
         XCTAssertEqual(weatherData.main.humidity, 64)
         XCTAssertEqual(weatherData.main.pressure, 1015)
-        XCTAssertEqual(weatherData.main.temperature, 298.48)
-        XCTAssertEqual(weatherData.main.temperatureMax, 300.05)
-        XCTAssertEqual(weatherData.main.temperatureMin, 297.56)
-        XCTAssertEqual(weatherData.wind.speed, 0.62)
+        XCTAssertEqual(weatherData.main.temperature, 20.48)
+        XCTAssertEqual(weatherData.main.temperatureMax, 25.05)
+        XCTAssertEqual(weatherData.main.temperatureMin, 14.56)
+        XCTAssertEqual(weatherData.wind.speed, 5.62)
         XCTAssertEqual(weatherData.wind.degree, 349)
         XCTAssertEqual(weatherData.wind.gust, 1.18)
     }

@@ -39,6 +39,13 @@
         "identifier" : "WeatherKitTests",
         "name" : "WeatherKitTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..\/Open-Weather",
+        "identifier" : "SearchKitTests",
+        "name" : "SearchKitTests"
+      }
     }
   ],
   "version" : 1

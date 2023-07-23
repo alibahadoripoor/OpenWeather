@@ -25,6 +25,13 @@
         "identifier" : "WeatherKitTests",
         "name" : "WeatherKitTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "SearchKitTests",
+        "name" : "SearchKitTests"
+      }
     }
   ],
   "version" : 1
