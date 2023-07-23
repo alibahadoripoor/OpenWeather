@@ -11,10 +11,16 @@ public final class SearchViewModel: ObservableObject {
 
     public init(cityService: CityServiceProtocol) {
         self.cityService = cityService
+        $searchQuery
+            .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
+            .sink { [weak self] query in
+                guard let self = self else { return }
+                Task { await self.searchCities(query) }
+            }
+            .store(in: &cancellables)
     }
     
-    @Sendable
-    public func fetchCities(for query: String) async {
+    public func searchCities(_ query: String) async {
         do {
             let cities = try await cityService.fetchCities(for: query)
             await updateUI(.cities(cities.map(SearchViewState.City.init)))

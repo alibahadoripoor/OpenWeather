@@ -5,7 +5,8 @@ public enum SearchViewState {
     case cities([City])
     case failure(FailureContent)
     
-    public struct City: Hashable {
+    public struct City: Identifiable, Hashable {
+        public var id: String { UUID().uuidString }
         public let name: String
     }
     
@@ -21,7 +22,14 @@ public enum SearchViewState {
 extension SearchViewState.City {
      
     init(_ city: City) {
-        self.init(name: "\(city.name), \(city.country)")
+        var name: String {
+            guard let state = city.state else {
+                return "\(city.name), \(city.country)"
+            }
+            return "\(city.name), \(state), \(city.country)"
+        }
+        
+        self.init(name: name)
     }
 }
 

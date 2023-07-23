@@ -29,7 +29,7 @@ public struct WeatherView: View {
             .toolbar { searchButtonView }
         }
         .onAppear(perform: viewModel.updateLocation)
-        .sheet(isPresented: $isSearchViewPresented) {
+        .fullScreenCover(isPresented: $isSearchViewPresented) {
             SearchView(
                 viewModel: viewModel.searchViewModel(),
                 isPresented: $isSearchViewPresented

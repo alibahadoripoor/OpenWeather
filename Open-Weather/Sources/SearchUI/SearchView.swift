@@ -49,8 +49,11 @@ struct CitiesView: View {
     let cities: [SearchViewState.City]
     
     var body: some View {
-        List(cities, id: \.self) { city in
-            Text(city.name)
+        VStack {
+            List(cities) { city in
+                Text(city.name)
+            }
+            .listStyle(.insetGrouped)
         }
     }
 }
