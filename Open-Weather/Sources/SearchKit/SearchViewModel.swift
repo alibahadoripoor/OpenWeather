@@ -5,8 +5,10 @@ public final class SearchViewModel: ObservableObject {
     
     private let cityService: CityServiceProtocol
     private var cancellables = Set<AnyCancellable>()
+    private var cities: [City] = []
     
     @Published public private(set) var viewState: SearchViewState = .initial
+    @Published public private(set) var selectedCity: City?
     @Published public var searchQuery: String = ""
 
     public init(cityService: CityServiceProtocol) {
@@ -22,17 +24,20 @@ public final class SearchViewModel: ObservableObject {
     
     public func searchCities(_ query: String) async {
         do {
-            let cities = try await cityService.fetchCities(for: query)
+            cities = try await cityService.fetchCities(for: query)
             await updateUI(.cities(cities.map(SearchViewState.City.init)))
         } catch {
             await updateUI(.failure(.serverError))
         }
     }
     
+    public func citySelected(_ id: String) {
+        selectedCity = cities.first { $0.id == id }
+        print(selectedCity)
+    }
+    
     @MainActor
-    func updateUI(_ viewState: SearchViewState) {
+    private func updateUI(_ viewState: SearchViewState) {
         self.viewState = viewState
     }
 }
-
-

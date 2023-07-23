@@ -4,6 +4,7 @@ import SearchKit
 public struct SearchView: View {
     
     @StateObject private var viewModel: SearchViewModel
+    @State private var selectedCityId: String?
     @Binding private var isPresented: Bool
     
     public init(viewModel: SearchViewModel, isPresented: Binding<Bool>) {
@@ -18,7 +19,10 @@ public struct SearchView: View {
                 case .initial:
                     EmptyView()
                 case .cities(let cities):
-                    CitiesView(cities: cities)
+                    CitiesView(
+                        cities: cities,
+                        selection: $selectedCityId
+                    )
                 case .failure(let failure):
                     EmptyView()
                 }
@@ -26,6 +30,11 @@ public struct SearchView: View {
             .searchable(text: $viewModel.searchQuery)
             .navigationTitle("Search For City")
             .toolbar { closeButtonView }
+            .onChange(of: selectedCityId) { id in
+                guard let id = id else { return }
+                viewModel.citySelected(id)
+                isPresented = false
+            }
         }
     }
 }
@@ -47,10 +56,11 @@ private extension SearchView {
 struct CitiesView: View {
     
     let cities: [SearchViewState.City]
+    @Binding var selection: String?
     
     var body: some View {
         VStack {
-            List(cities) { city in
+            List(cities, selection: $selection) { city in
                 Text(city.name)
             }
             .listStyle(.insetGrouped)

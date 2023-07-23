@@ -43,7 +43,16 @@ public final class WeatherViewModel: ObservableObject {
     }
     
     public func searchViewModel() -> SearchViewModel {
-        SearchViewModel(cityService: CityService())
+        let searchViewModel = SearchViewModel(cityService: CityService())
+            
+        searchViewModel.$selectedCity
+            .sink { [weak self] city in
+                guard let self = self, let city = city else { return }
+                // fetch weather data
+            }
+            .store(in: &cancellables)
+        
+        return searchViewModel
     }
 }
 

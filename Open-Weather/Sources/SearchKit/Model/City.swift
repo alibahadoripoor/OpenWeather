@@ -1,6 +1,7 @@
 import Foundation
 
-public struct City: Decodable {
+public struct City {
+    public let id: String
     public let name: String
     public let latitude: Double
     public let longitude: Double
@@ -14,6 +15,7 @@ extension City {
     
     init(_ response: CityResponse) {
         self.init(
+            id: UUID().uuidString,
             name: response.name,
             latitude: response.lat,
             longitude: response.lon,
