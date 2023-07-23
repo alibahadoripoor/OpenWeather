@@ -9,6 +9,7 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(name: "CoreNetworking", targets: ["CoreNetworking"]),
+        .library(name: "CoreAssets", targets: ["CoreAssets"]),
         .library(name: "WeatherKit", targets: ["WeatherKit"]),
         .library(name: "WeatherUI", targets: ["WeatherUI"]),
     ],
@@ -30,6 +31,14 @@ let package = Package(
         .testTarget(
             name: "CoreNetworkingTests",
             dependencies: ["CoreNetworking"]
+        ),
+        
+        // MARK: - CoreAssets
+        
+        .target(
+            name: "CoreAssets",
+            dependencies: [],
+            resources: [.process("Assets")]
         ),
 
         // MARK: - WeatherKit
