@@ -105,10 +105,30 @@ private extension Array where Element == WeatherViewState.Weather.Tile {
     
     static func tiles(for weatherData: WeatherData) -> Self {
         [
-            .init(name: "FEELSLIKE", description: "\(Int(weatherData.main.feelsLike))°C", imageName: "thermometer.medium"),
-            .init(name: "HUMIDITY", description: "\(Int(weatherData.main.humidity)) %", imageName: "humidity"),
-            .init(name: "WINDSPEED", description: "\(Int(weatherData.wind.speed)) KM", imageName: "wind"),
-            .init(name: "PRESSURE", description: "\(Int(weatherData.main.pressure)) hPa", imageName: "gauge.medium")
+            .init(
+                name: "FEELSLIKE",
+                description: "\(Int(weatherData.main.feelsLike))°C",
+                imageName: "thermometer.medium"
+            ),
+            .init(
+                name: "HUMIDITY",
+                description: "\(Int(weatherData.main.humidity)) %",
+                imageName: "humidity"
+            ),
+            .init(
+                name: "WINDSPEED",
+                description: "\(Int(convertWindSpeedToKPH(weatherData.wind.speed))) km/h",
+                imageName: "wind"
+            ),
+            .init(
+                name: "PRESSURE",
+                description: "\(Int(weatherData.main.pressure)) hPa",
+                imageName: "gauge.medium"
+            )
         ]
+    }
+    
+    static private func convertWindSpeedToKPH(_ windSpeed: Double) -> Double {
+        return windSpeed * 3.6
     }
 }

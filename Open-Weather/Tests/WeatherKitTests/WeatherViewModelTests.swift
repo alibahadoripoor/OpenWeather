@@ -41,7 +41,7 @@ final class WeatherViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
-    func test_whenLocationUpdateFailed_thenErrorIsPublished() {
+    func test_whenLocationUpdateFailed_thenMockErrorIsPublished() {
         let expectation = expectation(description: "Location updated failed")
         
         mockLocationService.result = .failure(MockError())
@@ -50,6 +50,25 @@ final class WeatherViewModelTests: XCTestCase {
             .sink { result in
                 if case .failure(let error) = result {
                     XCTAssertTrue(error is MockError)
+                    expectation.fulfill()
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.updateLocation()
+        
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func test_whenLocationUpdateFailedWithAccessDeniedError_thenAccessDeniedErrorIsPublished() {
+        let expectation = expectation(description: "Location updated failed")
+        
+        mockLocationService.result = .failure(LocationService.AccessDeniedError())
+        
+        mockLocationService.onUpdate
+            .sink { result in
+                if case .failure(let error) = result {
+                    XCTAssertTrue(error is LocationService.AccessDeniedError)
                     expectation.fulfill()
                 }
             }
@@ -73,19 +92,40 @@ final class WeatherViewModelTests: XCTestCase {
         XCTAssertEqual(weather.description, "Moderate Rain\nH:25°C L:14°C")
         XCTAssertEqual(weather.iconUrl?.absoluteString, "https://openweathermap.org/img/wn/10d@2x.png")
         XCTAssertEqual(weather.temperature, "20°C")
+
         XCTAssertEqual(weather.tiles.count, 4)
+        
+        XCTAssertEqual(weather.tiles[0].name, "FEELSLIKE")
+        XCTAssertEqual(weather.tiles[0].description, "15°C")
+        XCTAssertEqual(weather.tiles[0].imageName, "thermometer.medium")
+
+        XCTAssertEqual(weather.tiles[1].name, "HUMIDITY")
+        XCTAssertEqual(weather.tiles[1].description, "64 %")
+        XCTAssertEqual(weather.tiles[1].imageName, "humidity")
+
+        XCTAssertEqual(weather.tiles[2].name, "WINDSPEED")
+        XCTAssertEqual(weather.tiles[2].description, "20 km/h")
+        XCTAssertEqual(weather.tiles[2].imageName, "wind")
+
+        XCTAssertEqual(weather.tiles[3].name, "PRESSURE")
+        XCTAssertEqual(weather.tiles[3].description, "1015 hPa")
+        XCTAssertEqual(weather.tiles[3].imageName, "gauge.medium")
     }
     
-    func test_whenFetchingWeatherDataFailed_thenViewStateIsFailure() async {
+    func test_whenFetchingWeatherDataFailed_thenViewStateIsFailure_andFailureTypeIsServerError() async {
         viewModel.currentCoordinate = .stub
         mockWeatherService.isResultSuccess = false
         
         await viewModel.fetchWeatherData()
         
-        guard case .failure = viewModel.viewState else {
+        guard case .failure(.serverError(let failure)) = viewModel.viewState else {
             XCTFail()
             return
         }
+        
+        XCTAssertEqual(failure.title, "Network Error")
+        XCTAssertEqual(failure.message, "Something went wrong, please try again!")
+        XCTAssertEqual(failure.buttonLabel, "Try Again")
     }
 }
 
