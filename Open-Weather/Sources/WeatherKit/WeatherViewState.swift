@@ -54,21 +54,21 @@ extension WeatherViewState.FailureType {
     
     static var serverError: Self {
         .serverError(.init(
-            title: Texts.networkError,
-            message: Texts.tryAgainMessage,
-            buttonLabel: Texts.tryAgain
+            title: Strings.networkError,
+            message: Strings.tryAgainMessage,
+            buttonLabel: Strings.tryAgain
         ))
     }
     
     static var accessDenied: Self {
         .accessDenied(.init(
-            title: Texts.accessDenied,
-            message: Texts.accessDeniedMessage,
-            buttonLabel: Texts.openSettings
+            title: Strings.accessDenied,
+            message: Strings.accessDeniedMessage,
+            buttonLabel: Strings.openSettings
         ))
     }
     
-    private struct Texts {
+    private struct Strings {
         static let accessDenied = "Access Denied"
         static let accessDeniedMessage = "We need to access your location. Please check your location service settings and try again!"
         static let networkError = "Network Error"
