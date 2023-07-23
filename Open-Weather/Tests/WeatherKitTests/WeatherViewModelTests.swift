@@ -105,7 +105,7 @@ final class WeatherViewModelTests: XCTestCase {
         XCTAssertEqual(weather.tiles[1].imageName, "humidity")
 
         XCTAssertEqual(weather.tiles[2].name, "WINDSPEED")
-        XCTAssertEqual(weather.tiles[2].description, "20 km/h")
+        XCTAssertEqual(weather.tiles[2].description, "20\nkm/h")
         XCTAssertEqual(weather.tiles[2].imageName, "wind")
 
         XCTAssertEqual(weather.tiles[3].name, "PRESSURE")

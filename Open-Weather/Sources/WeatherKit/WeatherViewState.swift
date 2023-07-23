@@ -118,7 +118,7 @@ private extension Array where Element == WeatherViewState.Weather.Tile {
             ),
             .init(
                 name: "WINDSPEED",
-                description: "\(Int(convertWindSpeedToKPH(weatherData.wind.speed))) km/h",
+                description: "\(Int(convertWindSpeedToKPH(weatherData.wind.speed)))\nkm/h",
                 imageName: "wind"
             ),
             .init(

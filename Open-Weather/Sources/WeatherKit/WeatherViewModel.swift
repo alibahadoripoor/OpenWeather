@@ -43,13 +43,24 @@ public final class WeatherViewModel: ObservableObject {
         }
     }
     
+    public func fetchWeatherData(forCity city: City) async {
+        await updateViewState(.loading)
+        
+        do {
+            let weatherData = try await weatherService.fetchWeatherData(forCity: city)
+            await updateViewState(.weather(.init(weatherData)))
+        } catch {
+            await updateViewState(.failure(.serverError))
+        }
+    }
+    
     public func searchViewModel() -> SearchViewModel {
         let searchViewModel = SearchViewModel(cityService: CityService())
             
         searchViewModel.$selectedCity
             .sink { [weak self] city in
                 guard let self = self, let city = city else { return }
-                // fetch weather data
+                Task { await self.fetchWeatherData(forCity: city) }
             }
             .store(in: &cancellables)
         
