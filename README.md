@@ -25,14 +25,16 @@ This project uses the following technologies:
 * OpenWeatherMap API: This app fetches weather data from the OpenWeatherMap API. Please refer to the API Key section below for how to provide your own API key.
 
 
-## UI
-
-The user interface is built using SwiftUI, providing a modern and beautiful user experience. 
+## User Interface
 
 There are two screens in the app:
 
 * The first screen shows the current weather for the user's current location or a user-selected location.
 * The second screen contains a search bar, where users can search for a location and select it to display its weather data on the first screen.
+
+| Dark | Light |
+| ---- | ---- |
+| <img src="https://github.com/alibahadoripoor/OpenWeather/assets/64734165/20d9d2c6-38b6-4cba-8322-a4118f0cfe36" width="300"> | <img src="https://github.com/alibahadoripoor/OpenWeather/assets/64734165/45b122c1-7794-494c-8595-3ca6f292cdb0" width="300"> |
 
 
 ## API Key
@@ -42,11 +44,11 @@ In order to fetch weather data, this app uses the OpenWeatherMap API, which requ
 * Sign up for a free account at OpenWeatherMap to get your API key.
 * Create a Token.json file at OpenWeather/Open-Weather/Sources/CoreNetworking/Secrets.
 * In the Token.json file, add the following JSON structure:
-
+```
 {
     "appId": "YOUR_APPID"
 }
-
+```
 The Token.json file is included in the .gitignore file to prevent the API key from being committed to version control for security reasons.
 
 
